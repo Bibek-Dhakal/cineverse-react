@@ -1,0 +1,21 @@
+.pageTitle {
+    font-size: 2rem;
+    margin-bottom: 2rem;
+    color: #f5c518;
+}
+
+.grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 1.5rem;
+}
+
+.message {
+    text-align: center;
+    font-size: 1.2rem;
+    padding: 4rem 0;
+}
+
+.error {
+    color: #e74c3c;
+}
