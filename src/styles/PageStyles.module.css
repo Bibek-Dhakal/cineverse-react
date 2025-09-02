@@ -1,6 +1,12 @@
+.pageHeader {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
 .pageTitle {
     font-size: 2rem;
-    margin-bottom: 2rem;
+    margin-bottom: 1rem;
     color: #f5c518;
 }
 
@@ -18,4 +24,44 @@
 
 .error {
     color: #e74c3c;
+}
+
+/* --- ADD THESE STYLES TO THE END OF src/styles/PageStyles.module.css --- */
+
+/* Generic Skeleton Styles for Search Page */
+.skeleton {
+    position: relative;
+    overflow: hidden;
+    background-color: #3a3a3a;
+}
+
+.skeleton::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -150%;
+    width: 150%;
+    height: 100%;
+    background-image: linear-gradient(
+            90deg,
+            rgba(255, 255, 255, 0),
+            rgba(255, 255, 255, 0.08),
+            rgba(255, 255, 255, 0)
+    );
+    transform: skewX(-20deg);
+    animation: shimmer 1.5s infinite;
+}
+
+@keyframes shimmer {
+    100% {
+        left: 150%;
+    }
+}
+
+.skeletonHeader {
+    height: 28px; /* Matches h2 size */
+    width: 200px;
+    border-radius: 6px;
+    margin-bottom: 1.5rem; /* Matches h2 margin */
+    margin-top: 2rem;
 }

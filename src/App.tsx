@@ -6,6 +6,8 @@ import DetailPage from './pages/DetailPage.tsx';
 import Header from './components/Header';
 import SearchResultsPage from "./pages/SearchResultsPage.tsx";
 import TvPage from "./pages/TvPage.tsx";
+import Footer from "./components/Footer.tsx";
+import ScrollToTopButton from "./components/ScrollToTopButton.tsx";
 
 function App() {
     return (
@@ -20,6 +22,8 @@ function App() {
                     <Route path="/tv/:id" element={<DetailPage mediaType="tv"/>}/>
                 </Routes>
             </main>
+            <Footer/>
+            <ScrollToTopButton/>
         </>
     );
 }

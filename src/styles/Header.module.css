@@ -13,6 +13,11 @@
     align-items: center;
 }
 
+.leftSection {
+    display: flex;
+    align-items: center;
+}
+
 .logo {
     font-size: 1.8rem;
     font-weight: bold;
@@ -24,6 +29,36 @@
     color: #f5c518;
 }
 
+/* --- New & Enhanced Styles for Navigation --- */
+.nav {
+    display: flex;
+    background-color: #2a2a2a;
+    border-radius: 20px;
+    padding: 4px;
+    margin-left: 2rem;
+}
+
+.navLink {
+    padding: 0.4rem 1.2rem;
+    text-decoration: none;
+    color: #fff;
+    border-radius: 20px;
+    transition: background-color 0.2s ease-in-out, color 0.2s ease-in-out;
+    font-weight: 500;
+}
+
+.navLink:hover {
+    color: #f5c518;
+}
+
+.activeLink {
+    composes: navLink; /* Inherits all styles from .navLink */
+    background-color: #f5c518;
+    /* ensure color #121212 dont let hover effect show up   */
+    color: #121212 !important;
+}
+
+/* --- Search Form Styles --- */
 .searchForm {
     display: flex;
 }
@@ -36,6 +71,11 @@
     color: #fff;
     outline: none;
     width: 250px;
+    transition: border-color 0.2s;
+}
+
+.searchInput:focus {
+    border-color: #f5c518;
 }
 
 .searchButton {
@@ -47,4 +87,9 @@
     font-weight: bold;
     cursor: pointer;
     border-radius: 0 20px 20px 0;
+    transition: background-color 0.2s;
+}
+
+.searchButton:hover {
+    background-color: #f8d44e;
 }

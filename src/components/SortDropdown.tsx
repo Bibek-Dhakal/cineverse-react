@@ -1,6 +1,7 @@
 // src/components/SortDropdown.tsx
 
 import React from 'react';
+import styles from '../styles/SortDropdown.module.css';
 
 const options = [
     {value: 'popularity.desc', label: 'Popularity'},
@@ -21,11 +22,13 @@ const SortDropdown: React.FC<SortDropdownProps> = ({sortBy, onChange, mediaType}
     );
 
     return (
-        <select value={sortBy} onChange={(e) => onChange(e.target.value)}>
-            {relevantOptions.map(opt => (
-                <option key={opt.value} value={opt.value}>{opt.label}</option>
-            ))}
-        </select>
+        <div className={styles.selectWrapper}>
+            <select className={styles.select} value={sortBy} onChange={(e) => onChange(e.target.value)}>
+                {relevantOptions.map(opt => (
+                    <option key={opt.value} value={opt.value}>{opt.label}</option>
+                ))}
+            </select>
+        </div>
     );
 };
 

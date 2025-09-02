@@ -5,6 +5,7 @@ import {useParams} from 'react-router-dom';
 import {useApi} from '../hooks/useApi';
 import {getImageUrl, getMovieDetails, getTvShowDetails} from '../services/api';
 import type {Media} from '../types/Media';
+import SkeletonDetailPage from '../components/SkeletonDetailPage';
 import styles from '../styles/MovieDetailPage.module.css';
 import pageStyles from '../styles/PageStyles.module.css';
 
@@ -17,19 +18,23 @@ const DetailPage: React.FC<DetailPageProps> = ({mediaType}) => {
 
     const fetchDetails = useCallback(() => {
         if (!id) {
-            // Return a promise that resolves to null or rejects
             return Promise.reject(new Error("No ID provided"));
         }
         return mediaType === 'movie' ? getMovieDetails(id) : getTvShowDetails(id);
-    }, [id, mediaType]); // Dependencies for this callback
+    }, [id, mediaType]);
 
     const {data: media, loading, error} = useApi<Media>(fetchDetails);
 
-    // ... rest of the component is unchanged
-    if (loading) return <div className={pageStyles.message}>Loading...</div>;
-    if (error) return <div className={`${pageStyles.message} ${pageStyles.error}`}>{error}</div>;
-    if (!media) return null;
+    if (loading) return <SkeletonDetailPage/>;
 
+    if (error) return <div className={`${pageStyles.message} ${pageStyles.error}`}>{error}</div>;
+    if (!media) return (
+        <div className={`${pageStyles.message} ${pageStyles.error}`}>
+            Media not found
+        </div>
+    );
+
+    // Normalize data for rendering
     const title = 'title' in media ? media.title : media.name;
     const releaseDate = 'release_date' in media ? media.release_date : media.first_air_date;
     const year = releaseDate ? new Date(releaseDate).getFullYear() : 'N/A';

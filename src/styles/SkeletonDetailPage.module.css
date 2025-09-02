@@ -1,0 +1,109 @@
+/* --- Core Skeleton & Shimmer --- */
+
+.skeleton {
+    position: relative;
+    overflow: hidden;
+    background-color: #3a3a3a;
+}
+
+.skeleton::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -150%;
+    width: 150%;
+    height: 100%;
+    background-image: linear-gradient(
+            90deg,
+            rgba(255, 255, 255, 0),
+            rgba(255, 255, 255, 0.08),
+            rgba(255, 255, 255, 0)
+    );
+    transform: skewX(-20deg);
+    animation: shimmer 1.5s infinite;
+}
+
+@keyframes shimmer {
+    100% {
+        left: 150%;
+    }
+}
+
+/* --- Layout --- */
+.content {
+    display: flex;
+    padding-top: 10vh; /* Matches the real detail page */
+    padding-bottom: 4rem;
+    gap: 2rem;
+    align-items: flex-start;
+}
+
+/* --- Poster Skeleton --- */
+.posterSkeleton {
+    width: 300px;
+    flex-shrink: 0; /* Prevents the poster from shrinking */
+    aspect-ratio: 2 / 3; /* Perfect for movie posters */
+    border-radius: 8px;
+}
+
+/* --- Info Skeleton --- */
+.infoSkeleton {
+    flex: 1;
+}
+
+.titleSkeleton {
+    height: 48px;
+    width: 80%;
+    border-radius: 8px;
+    margin-bottom: 1.5rem;
+}
+
+.metaGroup {
+    display: flex;
+    gap: 1.5rem;
+    margin-bottom: 1.5rem;
+}
+
+.metaItemSkeleton {
+    height: 24px;
+    width: 100px;
+    border-radius: 6px;
+}
+
+.genreGroup {
+    display: flex;
+    gap: 0.5rem;
+    margin-bottom: 2.5rem;
+}
+
+.genreSkeleton {
+    height: 30px;
+    width: 80px;
+    border-radius: 15px;
+}
+
+.headingSkeleton {
+    height: 28px;
+    width: 150px;
+    border-radius: 6px;
+    margin-bottom: 1rem;
+}
+
+.lineSkeleton {
+    height: 16px;
+    border-radius: 4px;
+    margin-bottom: 0.75rem;
+}
+
+/* Width utility classes */
+.w100 {
+    width: 100%;
+}
+
+.w90 {
+    width: 90%;
+}
+
+.w70 {
+    width: 70%;
+}
