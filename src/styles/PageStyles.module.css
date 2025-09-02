@@ -1,12 +1,14 @@
+/* src/styles/PageStyles.module.css */
+
 .pageHeader {
     display: flex;
     justify-content: space-between;
     align-items: center;
+    flex-wrap: wrap; /* Allow wrapping on small screens */
 }
 
 .pageTitle {
     font-size: 2rem;
-    margin-bottom: 1rem;
     color: #f5c518;
 }
 
@@ -26,9 +28,15 @@
     color: #e74c3c;
 }
 
-/* --- ADD THESE STYLES TO THE END OF src/styles/PageStyles.module.css --- */
+.sectionTitle {
+    font-size: 1.5rem;
+    margin-top: 2rem;
+    margin-bottom: 1.5rem;
+    border-bottom: 2px solid #2a2a2a;
+    padding-bottom: 0.5rem;
+}
 
-/* Generic Skeleton Styles for Search Page */
+/* --- Skeleton Styles --- */
 .skeleton {
     position: relative;
     overflow: hidden;
@@ -59,9 +67,30 @@
 }
 
 .skeletonHeader {
-    height: 28px; /* Matches h2 size */
+    height: 28px;
     width: 200px;
     border-radius: 6px;
-    margin-bottom: 1.5rem; /* Matches h2 margin */
+    margin-bottom: 1.5rem;
     margin-top: 2rem;
+}
+
+/* --- RESPONSIVENESS --- */
+@media (max-width: 768px) {
+    .pageTitle {
+        font-size: 1.8rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .grid {
+        /* Allow cards to be smaller on mobile */
+        grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+        gap: 1rem;
+    }
+
+    .pageHeader {
+        /* Stack title and dropdown on very small screens */
+        flex-direction: column;
+        align-items: flex-start;
+    }
 }

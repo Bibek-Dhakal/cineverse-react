@@ -1,3 +1,5 @@
+/* src/styles/ScrollToTopButton.module.css */
+
 .button {
     position: fixed;
     bottom: 2rem;
@@ -18,7 +20,6 @@
     cursor: pointer;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
 
-    /* Initial state for transition */
     opacity: 0;
     visibility: hidden;
     transform: translateY(20px);
@@ -35,4 +36,14 @@
     opacity: 1;
     visibility: visible;
     transform: translateY(0);
+}
+
+/* --- RESPONSIVENESS --- */
+@media (max-width: 768px) {
+    .button {
+        bottom: 1.5rem;
+        right: 1.5rem;
+        width: 45px;
+        height: 45px;
+    }
 }

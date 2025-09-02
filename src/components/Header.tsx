@@ -1,12 +1,19 @@
 // src/components/Header.tsx
 
-import React, {useState} from 'react';
-import {Link, NavLink, useNavigate} from 'react-router-dom';
+import React, {useRef, useState} from 'react';
+import {Link, NavLink, useLocation, useNavigate} from 'react-router-dom';
 import styles from '../styles/Header.module.css';
+import {ChevronDown} from "lucide-react";
+import useClickOutside from "../hooks/useClickOutside.ts";
 
 const Header: React.FC = () => {
     const [query, setQuery] = useState('');
     const navigate = useNavigate();
+    const {pathname} = useLocation();
+    const [isMobileNavOpen, setIsMobileNavOpen] = useState(false);
+    const mobileNavRef = useRef<HTMLDivElement>(null);
+
+    useClickOutside<HTMLDivElement | null>(mobileNavRef, () => setIsMobileNavOpen(false));
 
     const handleSearch = (e: React.FormEvent) => {
         e.preventDefault();
@@ -17,6 +24,27 @@ const Header: React.FC = () => {
         }
     };
 
+    const Nav = () => (
+        <nav className={styles.nav}>
+            {/* Use NavLink for active styling */}
+            <NavLink
+                to="/"
+                className={({isActive}) => (isActive ? styles.activeLink : styles.navLink)}
+                end // 'end' prop ensures it's only active for the exact path "/"
+                onClick={() => setIsMobileNavOpen(false)}
+            >
+                Movies
+            </NavLink>
+            <NavLink
+                to="/tv"
+                className={({isActive}) => (isActive ? styles.activeLink : styles.navLink)}
+                onClick={() => setIsMobileNavOpen(false)}
+            >
+                TV Shows
+            </NavLink>
+        </nav>
+    );
+
     return (
         <header className={styles.header}>
             <div className={`${styles.headerContent} container`}>
@@ -24,22 +52,24 @@ const Header: React.FC = () => {
                     <Link to="/" className={styles.logo}>
                         CineVerse
                     </Link>
-                    <nav className={styles.nav}>
-                        {/* Use NavLink for active styling */}
-                        <NavLink
-                            to="/"
-                            className={({isActive}) => (isActive ? styles.activeLink : styles.navLink)}
-                            end // 'end' prop ensures it's only active for the exact path "/"
+                    <div className={styles.navWrapper}>
+                        <Nav/>
+                    </div>
+                    <div className={styles.mobileNavWrapper}>
+                        <button
+                            type="button"
+                            className={styles.mobileNavButton}
+                            onClick={() => setIsMobileNavOpen(!isMobileNavOpen)}
                         >
-                            Movies
-                        </NavLink>
-                        <NavLink
-                            to="/tv"
-                            className={({isActive}) => (isActive ? styles.activeLink : styles.navLink)}
+                            {pathname === '/' ? "Movies" : "TV Shows"} <ChevronDown/>
+                        </button>
+                        <div
+                            ref={mobileNavRef}
+                            className={`${styles.mobileNav} ${isMobileNavOpen ? styles.mobileNavOpen : ''}`}
                         >
-                            TV Shows
-                        </NavLink>
-                    </nav>
+                            <Nav/>
+                        </div>
+                    </div>
                 </div>
 
                 <form onSubmit={handleSearch} className={styles.searchForm}>
