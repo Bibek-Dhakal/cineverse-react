@@ -4,7 +4,7 @@ import React, {useRef, useState} from 'react';
 import {Link, NavLink, useLocation, useNavigate} from 'react-router-dom';
 import styles from '../styles/Header.module.css';
 import {ChevronDown} from "lucide-react";
-import useClickOutside from "../hooks/useClickOutside.ts";
+import useClickOutside from "../hooks/useClickOutside";
 
 const Header: React.FC = () => {
     const [query, setQuery] = useState('');
@@ -50,7 +50,14 @@ const Header: React.FC = () => {
             <div className={`${styles.headerContent} container`}>
                 <div className={styles.leftSection}>
                     <Link to="/" className={styles.logo}>
-                        CineVerse
+                        <img
+                            src="/CineVerse-no-bg.png"
+                            height={60}
+                            alt="Logo"
+                        />
+                        <div>
+                            CineVerse
+                        </div>
                     </Link>
                     <div className={styles.navWrapper}>
                         <Nav/>
